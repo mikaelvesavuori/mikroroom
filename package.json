@@ -1,6 +1,6 @@
 {
   "name": "mikroroom",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Ultralight video meeting tool",
   "type": "module",
   "engines": {

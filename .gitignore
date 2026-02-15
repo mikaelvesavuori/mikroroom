@@ -18,6 +18,8 @@ ref*.png
 ref*.jpg
 ref*.jpeg
 sbom.json
+oss-licenses.txt
+VERSION
 
 # Generated
 mikroroom/

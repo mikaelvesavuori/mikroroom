@@ -264,11 +264,17 @@ const requestHandler = (req: IncomingMessage, res: ServerResponse) => {
       const iceServers: RTCIceServer[] = [{ urls: "stun:stun.cloudflare.com:3478" }];
 
       // Add TURN servers from environment if configured
-      if (process.env.TURN_SERVER_URL) {
+      const turnUrl = process.env.TURN_SERVER_URL;
+      if (
+        turnUrl &&
+        /^turns?:[^:]+:\d+/.test(turnUrl) &&
+        process.env.TURN_SERVER_USERNAME &&
+        process.env.TURN_SERVER_CREDENTIAL
+      ) {
         iceServers.push({
-          urls: process.env.TURN_SERVER_URL,
-          username: process.env.TURN_SERVER_USERNAME || "",
-          credential: process.env.TURN_SERVER_CREDENTIAL || "",
+          urls: turnUrl,
+          username: process.env.TURN_SERVER_USERNAME,
+          credential: process.env.TURN_SERVER_CREDENTIAL,
         });
       }
 

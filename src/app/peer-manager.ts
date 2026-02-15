@@ -69,10 +69,8 @@ export class PeerManager {
       const config = getConfig();
       if (config.iceServers && config.iceServers.length > 0) {
         this.iceServers = config.iceServers;
-        console.log("[PeerManager] ICE servers loaded:", this.iceServers.length, "servers");
       }
     } catch {
-      console.warn("[PeerManager] Config not loaded yet, using default ICE servers");
       // Keep using DEFAULT_ICE_SERVERS
     }
   }
@@ -103,10 +101,6 @@ export class PeerManager {
     name: string,
     isInitiator: boolean,
   ): Promise<RTCPeerConnection> {
-    console.log(
-      `[createPeerConnection] Creating connection for ${participantId} (${name}), initiator: ${isInitiator}`,
-    );
-
     // Check if connection already exists to prevent duplicates
     const existingPeer = this.peers.get(participantId);
     if (existingPeer) {
@@ -118,9 +112,6 @@ export class PeerManager {
 
     const connection = new RTCPeerConnection({
       iceServers: this.iceServers,
-      iceTransportPolicy: "all",
-      bundlePolicy: "max-bundle",
-      rtcpMuxPolicy: "require",
     });
 
     // Add local tracks with simulcast if video
@@ -166,8 +157,6 @@ export class PeerManager {
 
     // Handle ICE connection state
     connection.oniceconnectionstatechange = () => {
-      console.log(`ICE connection state with ${participantId}:`, connection.iceConnectionState);
-
       if (
         connection.iceConnectionState === "failed" ||
         connection.iceConnectionState === "disconnected"
@@ -178,8 +167,6 @@ export class PeerManager {
 
     // Handle connection state changes
     connection.onconnectionstatechange = () => {
-      console.log(`Connection state with ${participantId}:`, connection.connectionState);
-
       this.emit({
         type: "connection-state-change",
         participantId,
@@ -220,10 +207,6 @@ export class PeerManager {
       this.removePeer(participantId);
       return;
     }
-
-    console.log(
-      `Attempting connection recovery for ${participantId} (attempt ${attempts + 1}/${this.maxRecoveryAttempts})`,
-    );
 
     this.connectionRecoveryAttempts.set(participantId, attempts + 1);
 

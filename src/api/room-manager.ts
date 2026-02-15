@@ -130,8 +130,6 @@ export class RoomManager {
         };
         this.rooms.set(roomData.roomId, room);
       }
-
-      console.log(`Loaded ${this.rooms.size} pre-created rooms from disk`);
     } catch {
       // File doesn't exist or is invalid — start fresh
     }

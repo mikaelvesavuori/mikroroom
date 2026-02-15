@@ -255,7 +255,6 @@ mikroroom_uninstall() {
 
     print_success "MikroRoom has been uninstalled"
     echo ""
-    print_info "Your mikroroom.config.json file was not removed"
     print_info "Run 'hash -r' or restart your shell to clear the command cache"
 }
 

@@ -33,17 +33,15 @@ export async function loadConfig(): Promise<AppConfig> {
       if (iceResponse.ok) {
         const iceConfig = await iceResponse.json();
         config.iceServers = iceConfig.iceServers;
-        console.log("[Config] ICE servers loaded from server");
       }
     } catch (iceError) {
       console.warn("[Config] Failed to fetch ICE servers from server, using defaults:", iceError);
     }
 
     cachedConfig = config;
-    console.log("[Config] Loaded:", config);
     return config;
   } catch (error) {
-    console.warn("[Config] Failed to load config, using defaults:", error);
+    console.warn("[Config] Failed to load config, using defaults", error);
 
     // Fallback to auto-detected URL
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";

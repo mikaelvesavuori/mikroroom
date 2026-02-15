@@ -38,7 +38,6 @@ export class SignalingClient {
         this.ws = new WebSocket(this.url);
 
         this.ws.onopen = () => {
-          console.log("WebSocket connected");
           this.reconnectAttempts = 0;
           this.isReconnecting = false;
           this.flushMessageQueue();
@@ -57,7 +56,6 @@ export class SignalingClient {
         };
 
         this.ws.onclose = () => {
-          console.log("WebSocket closed");
           if (!this.isReconnecting) {
             this.attemptReconnect();
           }
@@ -82,10 +80,6 @@ export class SignalingClient {
     this.isReconnecting = true;
     this.reconnectAttempts++;
     const delay = this.reconnectDelay * this.reconnectAttempts;
-
-    console.log(
-      `Attempting reconnect ${this.reconnectAttempts}/${this.maxReconnectAttempts} in ${delay}ms`,
-    );
 
     setTimeout(() => {
       this.connect().catch(() => {

@@ -54,6 +54,7 @@ export interface UIElements {
   btnParticipants: HTMLButtonElement;
   btnMore: HTMLButtonElement;
   btnInvite: HTMLButtonElement;
+  btnIncomingVideo: HTMLButtonElement;
 
   // Mobile menu
   mobileMenu: HTMLElement;
@@ -63,6 +64,7 @@ export interface UIElements {
   btnMobileRecord: HTMLButtonElement;
   btnMobileLock: HTMLButtonElement;
   btnMobileHand: HTMLButtonElement;
+  btnMobileIncomingVideo: HTMLButtonElement;
 
   // Chat
   chatPanel: HTMLElement;
@@ -164,6 +166,7 @@ export class UIManager {
       btnParticipants: document.getElementById("btn-participants")! as HTMLButtonElement,
       btnMore: document.getElementById("btn-more")! as HTMLButtonElement,
       btnInvite: document.getElementById("btn-invite")! as HTMLButtonElement,
+      btnIncomingVideo: document.getElementById("btn-incoming-video")! as HTMLButtonElement,
 
       // Mobile menu
       mobileMenu: document.getElementById("mobile-menu")!,
@@ -175,6 +178,9 @@ export class UIManager {
       btnMobileRecord: document.getElementById("btn-mobile-record")! as HTMLButtonElement,
       btnMobileLock: document.getElementById("btn-mobile-lock")! as HTMLButtonElement,
       btnMobileHand: document.getElementById("btn-mobile-hand")! as HTMLButtonElement,
+      btnMobileIncomingVideo: document.getElementById(
+        "btn-mobile-incoming-video",
+      )! as HTMLButtonElement,
 
       // Chat
       chatPanel: document.getElementById("chat-panel")!,
@@ -390,9 +396,26 @@ export class UIManager {
     }
   }
 
-  updateIncomingVideoButton(_isDisabled: boolean): void {
-    // Incoming video button has been removed from the new minimal UI
-    // This method is kept for backwards compatibility but does nothing
+  updateIncomingVideoButton(isDisabled: boolean): void {
+    this.elements.btnIncomingVideo.classList.toggle("active", isDisabled);
+    this.elements.btnIncomingVideo.title = isDisabled
+      ? "Enable incoming video"
+      : "Disable incoming video";
+
+    const onIcon = this.elements.btnIncomingVideo.querySelector("#icon-incoming-on") as HTMLElement;
+    const offIcon = this.elements.btnIncomingVideo.querySelector(
+      "#icon-incoming-off",
+    ) as HTMLElement;
+    if (onIcon && offIcon) {
+      onIcon.style.display = isDisabled ? "none" : "block";
+      offIcon.style.display = isDisabled ? "block" : "none";
+    }
+
+    // Update mobile button text
+    const mobileBtn = this.elements.btnMobileIncomingVideo;
+    const span = mobileBtn.querySelector("span");
+    if (span) span.textContent = isDisabled ? "Enable incoming video" : "Disable incoming video";
+    mobileBtn.classList.toggle("active", isDisabled);
   }
 
   updateHandButton(isRaised: boolean): void {
@@ -681,6 +704,7 @@ export class UIManager {
       const backdrop = document.createElement("div");
       backdrop.className = "mobile-backdrop";
       backdrop.addEventListener("click", () => this.closeMobileMenu());
+      backdrop.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
       this.elements.mobileMenu.parentElement!.insertBefore(backdrop, this.elements.mobileMenu);
     }
   }

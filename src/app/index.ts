@@ -174,6 +174,7 @@ class MikroRoomApp {
     this.ui.elements.btnMute.addEventListener("click", () => this.toggleMute());
     this.ui.elements.btnVideo.addEventListener("click", () => this.toggleVideo());
     this.ui.elements.btnScreen.addEventListener("click", () => this.shareScreen());
+    this.ui.elements.btnIncomingVideo.addEventListener("click", () => this.toggleIncomingVideo());
     this.ui.elements.btnLeave.addEventListener("click", () => this.leaveMeeting());
     this.ui.elements.btnRetry.addEventListener("click", () => this.ui.showScreen("landing"));
 
@@ -239,6 +240,10 @@ class MikroRoomApp {
     this.ui.elements.btnMobileHand.addEventListener("click", () => {
       this.ui.closeMobileMenu();
       this.toggleHand();
+    });
+    this.ui.elements.btnMobileIncomingVideo.addEventListener("click", () => {
+      this.ui.closeMobileMenu();
+      this.toggleIncomingVideo();
     });
 
     // Window events
@@ -890,6 +895,19 @@ class MikroRoomApp {
       this.peerManager?.enableIncomingVideos();
       this.ui.updateIncomingVideoButton(false);
     }
+  }
+
+  private toggleIncomingVideo(): void {
+    this.isIncomingVideoManuallyDisabled = !this.isIncomingVideoManuallyDisabled;
+    this.isIncomingVideoDisabled = this.isIncomingVideoManuallyDisabled;
+
+    if (this.isIncomingVideoManuallyDisabled) {
+      this.peerManager?.disableIncomingVideos();
+    } else {
+      this.peerManager?.enableIncomingVideos();
+    }
+
+    this.ui.updateIncomingVideoButton(this.isIncomingVideoManuallyDisabled);
   }
 
   private toggleHand(): void {

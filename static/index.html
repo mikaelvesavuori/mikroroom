@@ -116,6 +116,15 @@
           <path
             d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
         </symbol>
+        <!-- Eye (incoming video on) -->
+        <symbol id="icon-eye" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </symbol>
+        <!-- Eye off (incoming video off) -->
+        <symbol id="icon-eye-off" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c1.691 0 3.297-.413 4.704-1.143M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+        </symbol>
         <!-- Checkmark -->
         <symbol id="icon-check" viewBox="0 0 24 24">
           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
@@ -366,6 +375,12 @@
                 </svg>
                 <span>Raise hand</span>
               </button>
+              <button id="btn-mobile-incoming-video" class="mobile-menu-item">
+                <svg class="icon">
+                  <use href="#icon-eye" />
+                </svg>
+                <span>Disable incoming video</span>
+              </button>
               <button id="btn-mobile-record" class="mobile-menu-item hidden">
                 <svg class="icon">
                   <use href="#icon-record" />
@@ -426,6 +441,14 @@
           </button>
 
           <div class="control-group advanced desktop-only">
+            <button id="btn-incoming-video" class="control-btn" title="Disable incoming video">
+              <svg class="icon" id="icon-incoming-on">
+                <use href="#icon-eye" />
+              </svg>
+              <svg class="icon" id="icon-incoming-off" style="display: none;">
+                <use href="#icon-eye-off" />
+              </svg>
+            </button>
             <button id="btn-hand" class="control-btn" title="Raise hand">
               <svg class="icon">
                 <use href="#icon-hand" />

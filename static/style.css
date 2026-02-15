@@ -1182,10 +1182,11 @@ h1 {
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   z-index: 1000;
-  max-height: 60vh;
+  max-height: 70vh;
   display: flex;
   flex-direction: column;
   animation: slideUp 0.3s ease;
+  overflow-y: scroll;
 }
 
 @keyframes slideUp {
@@ -1208,10 +1209,10 @@ h1 {
 
 .mobile-menu-content {
   padding: var(--space-m);
+  padding-bottom: 5.5rem;
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  overflow-y: auto;
 }
 
 .mobile-menu-item {
@@ -1219,7 +1220,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: var(--space-m);
-  padding: var(--space-m);
+  padding: var(--space-s) var(--space-m);
   background: var(--bg-tertiary);
   border: none;
   border-radius: var(--radius);
@@ -1227,6 +1228,13 @@ h1 {
   font-size: 1rem;
   cursor: pointer;
   transition: background var(--transition);
+  overflow: hidden;
+}
+
+.mobile-menu-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mobile-menu-item:hover {
@@ -1255,6 +1263,7 @@ h1 {
   background: rgba(0, 0, 0, 0.6);
   z-index: 999;
   animation: fadeIn 0.2s ease;
+  touch-action: none;
 }
 
 /* Error Screen */

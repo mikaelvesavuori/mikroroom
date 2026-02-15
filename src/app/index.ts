@@ -131,7 +131,7 @@ class MikroRoomApp {
     this.ui.elements.nameInput.addEventListener("input", () => this.updateLandingButtons());
     this.updateLandingButtons(); // Initial state
 
-    // Enter key on name input triggers "New Meeting"
+    // Enter key on name input triggers "New Meeting Room"
     this.ui.elements.nameInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter" && !this.ui.elements.btnCreateMeeting.disabled) {
         this.handleCreateMeeting();

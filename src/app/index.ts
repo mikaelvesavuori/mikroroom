@@ -586,6 +586,9 @@ class MikroRoomApp {
       this.isModerator = message.isModerator;
       this.ui.updateModeratorControls(this.isModerator);
       this.ui.showScreen("meeting");
+      // Local video srcObject was set while the meeting screen was still hidden,
+      // so autoplay may have silently failed. Kick it now that we're visible.
+      void this.ui.elements.localVideo.play();
       this.updateParticipantsList();
       return;
     }

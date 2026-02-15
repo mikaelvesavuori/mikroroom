@@ -1509,14 +1509,20 @@ h1 {
 
   .chat-panel,
   .participants-panel {
-    width: 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    margin-top: 60px;
-    z-index: 1000;
+    width: 100%;
+    z-index: 100;
+    border-left: none;
+  }
+
+  .chat-messages,
+  .participants-list {
+    min-height: 0;
+    max-height: calc(100dvh - 200px);
   }
 
   .desktop-only {

@@ -175,6 +175,15 @@ export function copyAssets() {
   } else {
     console.warn('⚠️  Icons directory not found:', iconsSrc);
   }
+
+  // Copy favicon.ico to root of dist/app
+  const faviconSrc = './icons/favicon/favicon.ico';
+  if (existsSync(faviconSrc)) {
+    copyFileSync(faviconSrc, './dist/app/favicon.ico');
+    console.log('✅ Favicon copied: dist/app/favicon.ico');
+  } else {
+    console.warn('⚠️  Favicon not found:', faviconSrc);
+  }
 }
 
 /**
@@ -214,6 +223,7 @@ export async function buildAll(options = {}) {
   console.log('  - dist/app/mikroroom.config.json');
   console.log('  - dist/app/manifest.json');
   console.log('  - dist/app/icons/');
+  console.log('  - dist/app/favicon.ico');
   console.log('  - dist/api/mikroroom.mjs');
 }
 

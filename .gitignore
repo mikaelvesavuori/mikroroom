@@ -22,7 +22,7 @@ sbom.json
 # Generated
 mikroroom/
 mikroroom-release/
-mikroroom.config.json
+/mikroroom.config.json
 
 # Deployment stuff
 deploy-*.sh

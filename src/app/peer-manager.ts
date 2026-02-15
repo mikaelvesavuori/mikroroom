@@ -77,6 +77,10 @@ export class PeerManager {
     }
   }
 
+  setParticipantId(id: string): void {
+    this.participantId = id;
+  }
+
   setLocalStream(stream: MediaStream): void {
     this.localStream = stream;
   }
@@ -115,7 +119,7 @@ export class PeerManager {
     const connection = new RTCPeerConnection({
       iceServers: this.iceServers,
       iceTransportPolicy: "all",
-      bundlePolicy: "balanced",
+      bundlePolicy: "max-bundle",
       rtcpMuxPolicy: "require",
     });
 

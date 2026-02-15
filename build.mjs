@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync, watch as fsWatch } from 'node:fs';
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, writeFileSync, watch as fsWatch } from 'node:fs';
 import { build } from 'esbuild';
 import { minify } from 'html-minifier-terser';
 import { transform } from 'lightningcss';
@@ -155,6 +155,26 @@ export function copyAssets() {
   } else {
     console.warn('⚠️  Config file not found:', configSrc);
   }
+
+  // Copy manifest.json
+  const manifestSrc = './manifest.json';
+  const manifestDest = './dist/app/manifest.json';
+  if (existsSync(manifestSrc)) {
+    copyFileSync(manifestSrc, manifestDest);
+    console.log('✅ Manifest copied: dist/app/manifest.json');
+  } else {
+    console.warn('⚠️  Manifest file not found:', manifestSrc);
+  }
+
+  // Copy icons directory
+  const iconsSrc = './icons';
+  const iconsDest = './dist/app/icons';
+  if (existsSync(iconsSrc)) {
+    cpSync(iconsSrc, iconsDest, { recursive: true });
+    console.log('✅ Icons copied: dist/app/icons/');
+  } else {
+    console.warn('⚠️  Icons directory not found:', iconsSrc);
+  }
 }
 
 /**
@@ -192,6 +212,8 @@ export async function buildAll(options = {}) {
   console.log('  - dist/app/style.css');
   console.log('  - dist/app/index.html');
   console.log('  - dist/app/mikroroom.config.json');
+  console.log('  - dist/app/manifest.json');
+  console.log('  - dist/app/icons/');
   console.log('  - dist/api/mikroroom.mjs');
 }
 
@@ -228,6 +250,14 @@ export async function watchMode(options = {}) {
     if (filename?.endsWith('.css')) await buildCSS(options).catch(console.error);
     else if (filename?.endsWith('.html')) await buildHTML(options).catch(console.error);
     else if (filename?.endsWith('.json')) copyAssets();
+  });
+
+  // Watch manifest.json
+  fsWatch('./', { recursive: false }, async (_eventType, filename) => {
+    if (filename === 'manifest.json') {
+      console.log(`🔄 Manifest changed: ${filename}`);
+      copyAssets();
+    }
   });
 
   console.log('Press Ctrl+C to stop watching\n');

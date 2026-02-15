@@ -35,7 +35,7 @@ cp sbom.json $TEMP_RELEASE_FOLDER/sbom.json
 
 # Create OSS license list
 npm run licenses
-mv oss-licenses.txt $TEMP_RELEASE_FOLDER/oss-licenses.txt
+[ -f oss-licenses.txt ] && mv oss-licenses.txt $TEMP_RELEASE_FOLDER/oss-licenses.txt
 
 # Create zip archives
 zip -r "mikroroom_${VERSION}.zip" $TEMP_RELEASE_FOLDER

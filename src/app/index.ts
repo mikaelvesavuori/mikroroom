@@ -576,6 +576,7 @@ class MikroRoomApp {
     // Initialize our participant ID only once (when we first join)
     if (this.participantId === null) {
       this.participantId = message.participantId;
+      this.peerManager?.setParticipantId(message.participantId);
     }
 
     // Prevent connecting to ourselves
@@ -1089,7 +1090,7 @@ class MikroRoomApp {
           : false,
       });
 
-      const videoTrack = newStream.getVideoTracks()[0];
+      const videoTrack = newStream.getVideoTracks()[0] ?? null;
 
       if (this.peerManager) {
         const senders = this.peerManager
@@ -1107,7 +1108,9 @@ class MikroRoomApp {
         this.localStream.removeTrack(oldVideoTrack);
         oldVideoTrack.stop();
       }
-      this.localStream.addTrack(videoTrack);
+      if (videoTrack) {
+        this.localStream.addTrack(videoTrack);
+      }
       this.ui.setLocalStream(this.localStream);
     } catch (error) {
       console.error("Failed to stop screen share:", error);

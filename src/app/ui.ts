@@ -636,7 +636,7 @@ export class UIManager {
 
     let html = `
       <div class="chat-message-header">
-        <span class="name">${message.participantName}</span>
+        <span class="name">${this.escapeHtml(message.participantName)}</span>
         <span class="time">${time}</span>
       </div>
       <div class="chat-message-text">${this.linkify(this.escapeHtml(message.text))}</div>
@@ -802,13 +802,13 @@ export class UIManager {
     item.className = "file-transfer-item";
     item.dataset.transferId = transfer.id;
 
-    const isReceiving = transfer.senderId !== "You";
+    const isReceiving = transfer.senderName !== "You";
 
     item.innerHTML = `
       <div class="file-info">
-        <span class="file-name">${transfer.fileName}</span>
+        <span class="file-name">${this.escapeHtml(transfer.fileName)}</span>
         <span class="file-size">${this.formatFileSize(transfer.fileSize)}</span>
-        <span class="file-sender">${isReceiving ? `From: ${transfer.senderName}` : "Sending..."}</span>
+        <span class="file-sender">${isReceiving ? `From: ${this.escapeHtml(transfer.senderName)}` : "Sending..."}</span>
       </div>
       <div class="progress-bar">
         <div class="progress-fill progress-width-0"></div>

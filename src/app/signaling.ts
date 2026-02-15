@@ -28,6 +28,7 @@ export class SignalingClient {
   private reconnectDelay = 1000;
   private messageQueue: SignalingMessage[] = [];
   private isReconnecting = false;
+  private lastJoinMessage: JoinMessage | null = null;
 
   constructor(private url: string) {}
 
@@ -94,6 +95,11 @@ export class SignalingClient {
   }
 
   private flushMessageQueue(): void {
+    // Re-join the room first if we have a previous join message
+    if (this.lastJoinMessage) {
+      this.send({ ...this.lastJoinMessage, timestamp: Date.now() });
+    }
+
     while (this.messageQueue.length > 0) {
       const message = this.messageQueue.shift();
       if (message) {
@@ -104,6 +110,7 @@ export class SignalingClient {
 
   disconnect(): void {
     this.isReconnecting = false;
+    this.lastJoinMessage = null;
     if (this.ws) {
       this.ws.close();
       this.ws = null;
@@ -147,6 +154,7 @@ export class SignalingClient {
       creatorToken,
       timestamp: Date.now(),
     };
+    this.lastJoinMessage = message;
     this.send(message);
   }
 

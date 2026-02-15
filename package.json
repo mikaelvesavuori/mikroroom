@@ -1,6 +1,6 @@
 {
   "name": "mikroroom",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Ultralight video meeting tool",
   "type": "module",
   "engines": {
@@ -21,7 +21,7 @@
     "deploy:frontend": "bash .deployment/deploy-frontend.sh",
     "dev": "npm run build:dev && concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "dev:client": "npx http-server dist/app -p 8000",
-    "dev:server": "tsx watch src/server/index.ts",
+    "dev:server": "tsx watch src/api/index.ts",
     "docker:build": "docker build -t mikroroom .",
     "docker:run": "docker run -p 3000:3000 mikroroom",
     "licenses": "grant check sbom.json --config .grant.yaml",
@@ -32,7 +32,7 @@
     "sbom": "syft file:package-lock.json --output spdx-json > ./sbom.json",
     "scan": "grype ./sbom.json -o json",
     "start": "node dist/api/mikroroom.mjs",
-    "start:dev": "tsx src/server/index.ts",
+    "start:dev": "tsx src/api/index.ts",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",

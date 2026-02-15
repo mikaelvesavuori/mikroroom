@@ -404,9 +404,7 @@ export class SignalingServer {
         });
         break;
       case "kick":
-        // BUG FIX: Close the target's socket and remove them properly
-        this.roomManager.kickParticipant(participant.roomId, message.targetId);
-        // Notify the kicked user
+        // Notify the kicked user before disconnecting them
         this.roomManager.sendTo(message.targetId, participant.roomId, {
           type: "moderator-action",
           roomId: participant.roomId,
@@ -415,6 +413,8 @@ export class SignalingServer {
           action: "kick",
           timestamp: Date.now(),
         });
+        // Close the target's socket and remove them after notification
+        this.roomManager.kickParticipant(participant.roomId, message.targetId);
         break;
       case "make-moderator":
         this.roomManager.updateParticipant(participant.roomId, message.targetId, {

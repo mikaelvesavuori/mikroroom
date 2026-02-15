@@ -1,0 +1,11 @@
+{
+  "apiUrl": "ws://localhost:3000/ws",
+  "iceServers": [
+    { "urls": "stun:stun.cloudflare.com:3478" },
+    {
+      "urls": "turn:turn.example.com:3478",
+      "username": "your-turn-username",
+      "credential": "your-turn-password"
+    }
+  ]
+}

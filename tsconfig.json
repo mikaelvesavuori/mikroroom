@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vitest/globals", "node"]
+  },
+  "include": ["src/**/*", "tests/client/app.test.ts", "tests/client/signaling.test.ts", "tests/server/integration.test.ts", "tests/server/room-manager.test.ts", "tests/server/signaling.test.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}

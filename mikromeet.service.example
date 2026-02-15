@@ -1,0 +1,40 @@
+# Example systemd service file for MikroRoom
+# Copy to /etc/systemd/system/mikroroom.service and customize
+
+[Unit]
+Description=MikroRoom Video Conferencing Server
+After=network.target
+
+[Service]
+Type=simple
+User=mikroroom
+Group=mikroroom
+WorkingDirectory=/opt/mikroroom
+Environment="NODE_ENV=production"
+Environment="PORT=3000"
+# Add your environment variables here:
+# Environment="TURN_SERVER_URL=turn:your-turn-server.com:3478"
+# Environment="TURN_SERVER_USERNAME=your-username"
+# Environment="TURN_SERVER_CREDENTIAL=your-password"
+
+# Use the full path to node (find with: which node)
+ExecStart=/usr/bin/node /opt/mikroroom/dist/server/mikroroom.mjs
+
+# Restart on failure
+Restart=on-failure
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mikroroom
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/mikroroom/data
+
+[Install]
+WantedBy=multi-user.target

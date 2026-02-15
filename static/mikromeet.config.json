@@ -1,0 +1,8 @@
+{
+  "apiUrl": "ws://localhost:3000/ws",
+  "iceServers": [
+    {
+      "urls": "stun:stun.cloudflare.com:3478"
+    }
+  ]
+}

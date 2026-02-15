@@ -1,0 +1,30 @@
+# Folders
+node_modules/
+dist/
+coverage/
+data/
+.claude/
+docs/
+.wrangler/
+
+# Files
+.env
+*.log
+.DS_Store
+*.bundled.*
+*.tgz
+*.zip
+ref*.png
+ref*.jpg
+ref*.jpeg
+sbom.json
+
+# Generated
+mikroroom/
+mikroroom-release/
+mikroroom.config.json
+
+# Deployment stuff
+deploy-*.sh
+*.service
+.deployment/

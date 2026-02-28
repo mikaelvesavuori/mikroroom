@@ -1,6 +1,6 @@
 # MikroRoom
 
-![Icon](./icons/icon-144x144.png)
+![Icon](./icons/ios/144.png)
 
 **The minimalist video meeting app that's all yours.**
 

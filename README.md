@@ -8,7 +8,7 @@ The ultralight, self-hosted video conferencing platform for teams who want freed
 
 MikroRoom is a self-hosted video conferencing solution that prioritizes simplicity and performance. Built with vanilla TypeScript and Node.js, it provides everything you need for video meetings without the overhead of heavy frameworks. This allows MikroRoom to run with incredibly modest hardware and becomes a cost- and performance-efficient way to do fully private (and sovereign!) video conferencing.
 
-![Build Status](https://github.com/mikaelvesavuori/mikroroom/workflows/main/badge.svg)
+![Build Status](https://github.com/mikaelvesavuori/mikroroom/workflows/build/badge.svg)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 

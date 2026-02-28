@@ -1,37 +1,61 @@
 # MikroRoom
 
-Ultralight video meeting tool. Uses WebRTC - zero frameworks, zero bloat.
+![Icon](./icons/icon-144x144.png)
+
+**The minimalist video meeting app that's all yours.**
+
+The ultralight, self-hosted video conferencing platform for teams who want freedom over their meetings.
+
+MikroRoom is a self-hosted video conferencing solution that prioritizes simplicity and performance. Built with vanilla TypeScript and Node.js, it provides everything you need for video meetings without the overhead of heavy frameworks. This allows MikroRoom to run with incredibly modest hardware and becomes a cost- and performance-efficient way to do fully private (and sovereign!) video conferencing.
+
+![Build Status](https://github.com/mikaelvesavuori/mikroroom/workflows/main/badge.svg)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+![Example view of MikroRoom](./readme/mikroroom-example.png)
 
 ## Features
 
-- **Zero dependencies** - Pure Node.js + TypeScript
-- **WebRTC** - P2P video/audio with SFU-like signaling
-- **Modern vanilla stack** - No React, no frameworks
-- **Clean architecture** - Modular, tested, maintainable
+- **Zero Dependencies**: Pure Node.js + TypeScript with no runtime dependencies
+- **Modern Vanilla Stack**: No React or other frameworks, just HTML/CSS and TS that compiles to JS
+- **Super fast loads**: ~25KB transfer size for the client app means it works on any connection
+- **Modern UX**: Looks and behaves like you'd expect of a modern app
+- **WebRTC**: Native Peer-to-peer video/audio with efficient signaling
+- **Self-Hosted**: Full control over your data and infrastructure
+- **Production-Ready**: Built-in security, rate limiting, etc.
 
 ## Quick Start
 
+### Production (recommended)
+
+Install the CLI with a single command, then download and run MikroRoom:
+
 ```bash
-# Install dependencies
-npm install
+# Install CLI
+curl -sSL https://releases.mikroroom.com/install.sh | bash
 
-# Development mode (uses HTTP, localhost:3000)
-npm run dev
+# Install MikroRoom
+mikroroom install
 
-# Build for production
-npm run build
+# Initialize in your project directory
+mkdir my-meeting && cd my-meeting
+mikroroom init
 
-# Start production server
-npm start
+# Start the server
+mikroroom start
 
-# Run tests
-npm test
-
-# Lint code
-npm run lint
+# In a second terminal, run the frontend app
+npx http-server app -p 8000
 ```
 
-Then open `http://localhost:3000` in your browser.
+Then open `http://localhost:8000` in your browser.
+
+### Download release
+
+Download the [latest release](https://releases.mikroroom.com/mikroroom_latest.zip), extract it, and deploy:
+
+- `api/mikroroom.mjs` — run with `node mikroroom.mjs` on your server
+- `app/` — deploy to any static host or serve with a reverse proxy
 
 ## Configuration
 
@@ -68,43 +92,10 @@ TURN_SERVER_USERNAME=your-username
 TURN_SERVER_CREDENTIAL=your-password
 ```
 
-## Production Deployment
-
-### Minimal Setup (works for most cases)
-
-```bash
-npm install
-npm run build
-PORT=8080 npm start
-```
-
-### Recommended Setup (with TURN server)
-
-```bash
-# Set environment variables
-export PORT=443
-export TURN_SERVER_URL=turn:your-server.com:3478
-export TURN_SERVER_USERNAME=user
-export TURN_SERVER_CREDENTIAL=pass
-
-# Build and run
-npm run build
-npm start
-```
-
-### Using Docker
-
-```bash
-# Build image
-docker build -t mikroroom .
-
-# Run container
-docker run -d -p 8080:8080 \
-  -e PORT=8080 \
-  -e TURN_SERVER_URL=turn:your-server.com:3478 \
-  mikroroom
-```
-
 ## See docs site for more
 
 Visit [the docs site](https://docs.mikroroom.com) to get much more detailed instructions.
+
+## License
+
+MIT. See the [LICENSE](LICENSE) file.
